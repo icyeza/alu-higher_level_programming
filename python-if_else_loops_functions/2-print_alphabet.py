@@ -1,4 +1,9 @@
 #!/usr/bin/python3
-for element in range(a,z):
+output = ""
+for element in "abcdefghijklmnopqrstuvwxyz":
     if element.isupper():
-    print(f"Uppercase letter not found:{element}" )
+        output += f"Uppercase letter found: {element}\n"
+    else:
+        output += f"Uppercase letter not found: {element}\n"
+print(output, end="")
+
