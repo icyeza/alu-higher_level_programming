@@ -1,2 +1,3 @@
 #!/usr/bin/python3
-print('"Programming is like building a multilingual puzzle')
+for element in range(a,z):
+    print(element)
