@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-''' this is my code'''
+''' OK '''
 
 
 class Base:
