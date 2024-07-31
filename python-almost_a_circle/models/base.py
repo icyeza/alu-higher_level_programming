@@ -1,4 +1,5 @@
-se class"""
+#!/usr/bin/python3
+"""A base class"""
 
 import json
 import turtle
