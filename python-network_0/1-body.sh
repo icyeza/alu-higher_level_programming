@@ -1,3 +1,3 @@
-#!/bin/bash 
-# display the body of a file 
+#!/bin/bash
+# display body if 200
 curl -sLfG "$1"
