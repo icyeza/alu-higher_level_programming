@@ -1,3 +1,4 @@
+
 #!/usr/bin/python3
 """
     script that takes in an argument and displays all
