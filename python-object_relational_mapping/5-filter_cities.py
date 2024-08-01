@@ -1,39 +1,38 @@
 #!/usr/bin/python3
-'''
-    A script that takes in the name of a state as an
-    argument and lists all cities of that state, using
-    the database hbtn_0e_4_usa
-'''
+""" lists all cities from the database hbtn_0e_4_usa
+"""
 
-
-import sys
 import MySQLdb
+import sys
+
+
+def my_safe_filter_states():
+    """ lists all cities from the database
+    hbtn_0e_4_usa"""
+
+    db = MySQLdb.connect(host="localhost",
+                         port=3306,
+                         user=sys.argv[1],
+                         passwd=sys.argv[2],
+                         db=sys.argv[3]
+                         )
+    cursor = db.cursor()
+
+    cursor \
+        .execute("SELECT cities.name FROM cities\
+                    JOIN states ON cities.state_id = states.id\
+                    AND states.name = %s\
+                    ORDER BY cities.id ASC", (sys.argv[4],))
+
+    records = cursor.fetchall()
+    cites = []
+    for data in records:
+        cites.append(data[0])
+
+    print(", ".join(cites))
+    cursor.close()
+    db.close()
 
 
 if __name__ == "__main__":
-    conn = MySQLdb.connect(
-        user=sys.argv[1],
-        passwd=sys.argv[2],
-        db=sys.argv[3],
-        host="localhost",
-        port=3306
-    )
-
-    state_name = sys.argv[4]
-
-    cursor = conn.cursor()
-
-    sql_com = """SELECT cities.name
-          FROM states
-          INNER JOIN cities ON states.id = cities.state_id
-          WHERE states.name = %s
-          ORDER BY cities.id ASC"""
-
-    cursor.execute(sql_com, (state_name,))
-
-    data = cursor.fetchall()
-
-    print(", ".join([city[0] for city in data]))
-
-    cursor.close()
-    conn.close()
+    my_safe_filter_states()
